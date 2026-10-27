@@ -1,11 +1,13 @@
 <?php
 
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminPoliController;
 use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\Admin\PasienController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dokter\JadwalPeriksaController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +28,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('polis', AdminPoliController::class);
     Route::resource('dokter', DokterController::class);
     Route::resource('pasien', PasienController::class);
+    Route::resource('obat', ObatController::class);
 });
 
 
@@ -33,6 +36,7 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
     Route::get('/dashboard', function () {
         return view('dokter.dashboard');
     })->name('dokter.dashboard');
+    Route::resource('jadwal-periksa', JadwalPeriksaController::class);
 });
 
 
